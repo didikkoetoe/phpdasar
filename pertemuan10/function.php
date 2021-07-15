@@ -12,4 +12,22 @@ function read ($qury) {
     return $rows;
 }
 
+function create ($post) {
+    global $conn;
+    
+    $judul = htmlspecialchars($post["judul"]);
+    $pengarang = htmlspecialchars($post["pengarang"]);
+    $tahun = htmlspecialchars($post["tahun"]);
+    $penerbit = htmlspecialchars($post["penerbit"]);
+    $gambar = htmlspecialchars($post["gambar"]);
+
+    $query = "INSERT INTO buku VALUES(
+        '', '$judul' , '$pengarang', '$tahun' , '$penerbit', '$gambar')";
+    
+    mysqli_query($conn, $query);
+    
+    return mysqli_affected_rows($conn);
+        
+}
+
 ?>
