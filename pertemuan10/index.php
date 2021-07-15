@@ -2,6 +2,8 @@
 
 require "function.php";
 
+$books = read("SELECT * FROM buku");
+
 ?>
 
 <!DOCTYPE html>
@@ -30,6 +32,17 @@ require "function.php";
         <th>Gambar</th>
 
         <?php $i=0; ?>
+        <?php foreach ( $books as $book) : ?>
+            <tr>
+                <td><?= $i; ?></td>
+                <td><?= $book["judul"]; ?></td>
+                <td><?= $book["pengarang"]; ?></td>
+                <td><?= $book["tahun"]; ?></td>
+                <td><?= $book["penerbit"]; ?></td>
+                <td><?= $book["gambar"]; ?></td>
+            </tr>
+        <?php $i++; ?>
+        <?php endforeach; ?>
 
     </table>
 
