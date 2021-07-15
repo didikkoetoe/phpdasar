@@ -31,13 +31,13 @@ $books = read("SELECT * FROM buku");
         <th>Penerbit</th>
         <th>Gambar</th>
 
-        <?php $i=0; ?>
+        <?php $i=1; ?>
         <?php foreach ( $books as $book) : ?>
             <tr>
                 <td><?= $i; ?></td>
                 <td>
                     <a href="edit.php">Edit</a> | 
-                    <a href="hapus.php">Hapus</a>
+                    <a href="delete.php?id=<?= $book["id"]; ?>">Hapus</a>
                 </td>
                 <td><?= $book["judul"]; ?></td>
                 <td><?= $book["pengarang"]; ?></td>
