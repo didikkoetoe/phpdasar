@@ -36,7 +36,7 @@ $books = read("SELECT * FROM buku");
             <tr>
                 <td><?= $i; ?></td>
                 <td>
-                    <a href="edit.php">Edit</a> | 
+                    <a href="edit.php?id=<?= $book["id"]; ?>">Edit</a> | 
                     <a href="delete.php?id=<?= $book["id"]; ?>">Hapus</a>
                 </td>
                 <td><?= $book["judul"]; ?></td>
