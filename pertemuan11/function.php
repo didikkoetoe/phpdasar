@@ -27,13 +27,36 @@ function create ($post) {
     mysqli_query($conn, $query);
     
     return mysqli_affected_rows($conn);
-        
+    
 }
 
 function delete ($id) {
     global $conn;
-
+    
     mysqli_query($conn, "DELETE FROM buku WHERE id=$id");
+    return mysqli_affected_rows($conn);
+}
+
+function update ($post) {
+    global $conn;
+    
+    $id = $post["id"];
+    $judul = htmlspecialchars($post["judul"]);
+    $pengarang = htmlspecialchars($post["pengarang"]);
+    $tahun = htmlspecialchars($post["tahun"]);
+    $penerbit = htmlspecialchars($post["penerbit"]);
+    $gambar = htmlspecialchars($post["gambar"]);
+    
+    $query = "UPDATE buku SET 
+                judul = '$judul',
+                pengarang = '$pengarang',
+                tahun = '$tahun',
+                penerbit = '$penerbit',
+                gambar = '$gambar'
+            WHERE id = $id";
+    
+    mysqli_query($conn, $query);
+    
     return mysqli_affected_rows($conn);
 }
 
