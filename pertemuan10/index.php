@@ -35,11 +35,15 @@ $books = read("SELECT * FROM buku");
         <?php foreach ( $books as $book) : ?>
             <tr>
                 <td><?= $i; ?></td>
+                <td>
+                    <a href="edit.php">Edit</a> | 
+                    <a href="hapus.php">Hapus</a>
+                </td>
                 <td><?= $book["judul"]; ?></td>
                 <td><?= $book["pengarang"]; ?></td>
                 <td><?= $book["tahun"]; ?></td>
                 <td><?= $book["penerbit"]; ?></td>
-                <td><?= $book["gambar"]; ?></td>
+                <td><img src="../image/<?= $book["gambar"]; ?>" alt="" width="100"></td>
             </tr>
         <?php $i++; ?>
         <?php endforeach; ?>
