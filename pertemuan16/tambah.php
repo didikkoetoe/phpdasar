@@ -1,5 +1,12 @@
 <?php
 
+session_start();
+
+if (!isset($_SESSION["login"])) {
+    header("Location: login.php");
+    exit;
+}
+
 // Hubungkan dengan halaman function.php
 require "function.php";
 
@@ -7,15 +14,15 @@ require "function.php";
 if (isset($_POST["submit"])) {
     // Cek apakah data sudah berhasil di tambahkan atau belum
     if (create($_POST) > 0) {
-        // Jika berhasil alert berhasil dan pindah ke halaman admin
+        // Jika berhasil alert berhasil dan pindah ke halaman index
         echo "<script>
         alert('Data berhasil di tambahakan');
-        document.location.href = 'admin.php';
+        document.location.href = 'index.php';
         </script>";
     } else {
         echo "<script>
         alert('Data gagal di tambahakan');
-        document.location.href = 'admin.php';
+        document.location.href = 'index.php';
         </script>";
     }
 }
