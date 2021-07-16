@@ -41,7 +41,7 @@ if (isset($_POST["submit"])) {
     <h1>Halaman Login</h1>
 
     <?php if (isset($error)) : ?>
-        <p>Username / Password salah</p>
+        <p style="color: red; font-style:italic;">Username / Password salah</p>
     <?php endif; ?>
 
     <form action="" method="POST">
