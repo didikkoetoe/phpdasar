@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 require "function.php";
 
 if (isset($_POST["submit"])) {
@@ -11,8 +12,11 @@ if (isset($_POST["submit"])) {
     if ($cek = read("SELECT * FROM users WHERE username = '$username'")) {
         // cek password
         if (password_verify($password, $cek[0]["password"])) {
-            // Jika benar arahkan ke halaman admin
-            header("Location: admin.php");
+            // ! Set $_SESSION
+            $_SESSION["login"] = true;
+
+            // Jika benar arahkan ke halaman index
+            header("Location: index.php");
             exit;
         }
     }
