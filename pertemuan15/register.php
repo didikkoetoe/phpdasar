@@ -1,12 +1,15 @@
-<?php 
+<?php
 
 require "function.php";
 
 if (isset($_POST["register"])) {
-    if(register($_POST) > 0) {
+    if (register($_POST) > 0) {
         echo "<script>
         alert('user baru berhasil di tambahkan');
         </script>";
+
+        header("Location: login.php");
+        exit;
     }
 }
 
@@ -14,6 +17,7 @@ if (isset($_POST["register"])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,8 +29,9 @@ if (isset($_POST["register"])) {
         }
     </style>
 </head>
+
 <body>
-    
+
     <h1>Registrasi Data Diri</h1>
 
     <form action="" method="POST">
@@ -53,4 +58,5 @@ if (isset($_POST["register"])) {
     </form>
 
 </body>
+
 </html>
