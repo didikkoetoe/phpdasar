@@ -113,9 +113,9 @@ function upload()
     }
 
     // Cek apakah file yang di upload ber ekstensi jpg, jpeg, atau png
-    $ekstensiFileBenar = ["jpg", "jpeg", "png"];
-    $ekstensiFileUser = explode(".", $namaFile);
-    $hasilEkstensiFile = strtolower(end($ekstensiFileUser));
+    $ekstensiFileBenar = ["jpg", "jpeg", "png"]; // ! File yang di dukung
+    $ekstensiFileUser = explode(".", $namaFile); // TODO menghasilkan array ["namaFile" , "ekstensiFile"]
+    $hasilEkstensiFile = strtolower(end($ekstensiFileUser)); // Menghasilkan ekstensi file yang dicari dan merubah nama file menjadi huruf kecil
     if (!in_array($hasilEkstensiFile, $ekstensiFileBenar)) {
         echo "<script>
         alert('Ekstensi file salah');
