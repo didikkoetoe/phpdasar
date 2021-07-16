@@ -2,6 +2,9 @@
 
 // Koneksi ke database
 $conn = mysqli_connect("localhost", "root", "", "buku");
+if (!$conn) {
+    die('Could not connect: ' . 'Nama database salah');
+}
 
 // function untuk query baca data di table buku dan mengembalikan isinya
 function read($query)
@@ -139,7 +142,8 @@ function upload()
 }
 
 // function register
-function register ($post) {
+function register($post)
+{
     global $conn;
 
     // tampung username dan buat username menjadi tidak case sensitive
@@ -150,24 +154,24 @@ function register ($post) {
 
     // Cek apakah username sudah ada atau belum
     $result = mysqli_query($conn, "SELECT username FROM users WHERE username='$username'");
-    if ( mysqli_fetch_assoc($result)) {
+    if (mysqli_fetch_assoc($result)) {
         echo "<script>
         alert('Username sudah ada');
         </script>";
         return false;
     }
-    
+
     // Cek apakah password yang di masukan sama atau tidak
-    if ( $password != $password2 ) {
+    if ($password != $password2) {
         echo "<script>
         alert('Password yang anda masukan tidak sesuai');
         </script>";
         return false;
-    } 
+    }
 
     // Jika sama enkripsi password telebih dahulu
     $password = password_hash($password, PASSWORD_DEFAULT);
-    
+
     // Jika semua benar, masukan user baru ke database;
     mysqli_query($conn, "INSERT INTO users VALUES(
         '', '$username', '$password')");
