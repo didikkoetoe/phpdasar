@@ -1,7 +1,17 @@
 <?php
+session_start();
 require "functions.php";
 
-$friends = read("SELECT * FROM teman")
+if (!isset($_SESSION["login"])) {
+    header("Location: login.php");
+    exit;
+}
+
+$friends = read("SELECT * FROM teman");
+
+if (isset($_POST["cari"])) {
+    $friends = cari($_POST["keyword"]);
+}
 
 ?>
 <!DOCTYPE html>
@@ -13,29 +23,30 @@ $friends = read("SELECT * FROM teman")
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/lindex.css">
     <link rel="stylesheet" href="fontawesome-free-5.15.3-web/css/all.min.css">
+    <link rel="stylesheet" href="index.css">
     <script src="js/jquery.js"></script>
 </head>
 
-<body>
+<body class="bg-secondary">
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
-            <span class="navbar-brand h1">Didik</span> <!-- Brand -->
+            <span class="navbar-brand h1"><?= $_SESSION["login"]; ?></span> <!-- Brand -->
 
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="cari">cari</button>
+            <form class="d-flex" method="POST">
+                <input class="form-control me-2" type="search" name="keyword" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit" name="cari">cari</button>
             </form>
         </div>
     </nav>
     <!-- Akhir Navbar -->
 
     <!-- Data -->
-    <div class="container">
+    <div class="container border bg-light mt-4 rounded">
         <h2 class="text-center mt-3">Daftar Teman</h2>
         <a href="tambah.php" class="btn btn-success">Tambah Teman</a>
+        <a href="logout.php" class="btn btn-warning float-end">Log Out</a>
         <hr>
         <table class="table">
             <thead class="text-center table-dark">
@@ -54,14 +65,14 @@ $friends = read("SELECT * FROM teman")
                 <?php foreach ($friends as $friend) : ?>
                     <tr>
                         <th><?= $i; ?></th>
-                        <td><a href="edit.php" class="btn btn-success btn-sm">Edit</a> |
-                            <a href="edit.php" class="btn btn-danger btn-sm">Hapus</a>
+                        <td><a href="edit.php?id=<?= $friend["id"]; ?>" class="btn btn-success btn-sm">Edit</a> |
+                            <a href="hapus.php?id=<?= $friend["id"]; ?>" class="btn btn-danger btn-sm">Hapus</a>
                         </td>
                         <td><?= $friend["nama"]; ?></td>
                         <td><?= $friend["alamat"]; ?></td>
                         <td><?= $friend['jurusan']; ?></td>
                         <td><?= $friend["birthday"]; ?></td>
-                        <td><img src="img/<?= $friend["gambar"]; ?>" alt="Foto <?= $friend["nama"]; ?>"></td>
+                        <td><img class="img-thumbnail" style="width: 100px;height:100px;" src="img/<?= $friend["gambar"]; ?>" alt="Foto <?= $friend["nama"]; ?>"></td>
                     </tr>
                     <?php $i++ ?>
                 <?php endforeach; ?>
