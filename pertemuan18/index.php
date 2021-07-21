@@ -7,7 +7,14 @@ if (!isset($_SESSION["login"])) {
     exit;
 }
 
-$friends = read("SELECT * FROM teman");
+// Konfigurasi Pagination
+$jmlDataHalaman = 2;
+$jmlData = count(read("SELECT * FROM teman"));
+$jmlHalaman = ceil($jmlData / $jmlDataHalaman);
+$halAktif = (isset($_GET["halaman"])) ? $_GET["halaman"] : 1;
+$awalData = ($jmlDataHalaman * $halAktif) - $jmlDataHalaman;
+
+$friends = read("SELECT * FROM teman LIMIT $awalData, $jmlDataHalaman");
 
 if (isset($_POST["cari"])) {
     $friends = cari($_POST["keyword"]);
@@ -38,6 +45,7 @@ if (isset($_POST["cari"])) {
                 <input class="form-control me-2" type="search" name="keyword" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit" name="cari">cari</button>
             </form>
+            <a href="logout.php" class="btn btn-warning float-end">Log Out</a>
         </div>
     </nav>
     <!-- Akhir Navbar -->
@@ -46,7 +54,43 @@ if (isset($_POST["cari"])) {
     <div class="container border bg-light mt-4 rounded">
         <h2 class="text-center mt-3">Daftar Teman</h2>
         <a href="tambah.php" class="btn btn-success">Tambah Teman</a>
-        <a href="logout.php" class="btn btn-warning float-end">Log Out</a>
+
+        <!-- Pagination -->
+        <ul class="pagination float-end">
+
+            <!-- Previous -->
+            <?php if ($halAktif > 1) : ?>
+                <li class="page-item"><a class="page-link" href="?halaman=<?= $halAktif - 1; ?>">Previous</a></li>
+            <?php else : ?>
+                <li class="page-item disabled"><a class="page-link" href="?halaman=<?= $halAktif - 1; ?>">Previous</a></li>
+            <?php endif; ?>
+            <!-- Akhir Previous -->
+
+            <!-- Angka Halaman -->
+            <?php for ($i = 1; $i <= $jmlHalaman; $i++) : ?>
+
+                <?php if ($i == $halAktif) : ?>
+                    <li class="page-item active" aria-current="page">
+                        <a class="page-link" href="?halaman=<?= $i; ?>"><?= $i; ?></a>
+                    </li>
+                <?php else : ?>
+                    <li class="page-item"><a class="page-link" href="?halaman=<?= $i; ?>"><?= $i; ?></a></li>
+                <?php endif; ?>
+
+            <?php endfor; ?>
+            <!-- Akhir angka halaman -->
+
+            <!-- Next -->
+            <?php if ($halAktif < $jmlHalaman) : ?>
+                <li class="page-item"><a class="page-link" href="?halaman=<?= $halAktif + 1; ?>">Next</a></li>
+            <?php else : ?>
+                <li class="page-item disabled"><a class="page-link" href="?halaman=<?= $halAktif + 1; ?>">Next</a></li>
+            <?php endif; ?>
+            <!-- Akhir next -->
+
+        </ul>
+        <!-- Akhir pagination -->
+
         <hr>
         <table class="table">
             <thead class="text-center table-dark">

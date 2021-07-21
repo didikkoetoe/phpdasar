@@ -1,7 +1,7 @@
 <?php
 session_start();
 require "functions.php";
-if (!$_SESSION["key"]) {
+if (!$_SESSION["login"]) {
     header("Location: login.php");
     exit;
 }
