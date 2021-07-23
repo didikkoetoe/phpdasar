@@ -39,6 +39,12 @@ if (isset($_POST['register'])) {
 
 <body>
     <div class="container">
+        <!-- header -->
+        <h2 class="text-center">Sign Up</h2>
+        <hr>
+        <!-- akhir header -->
+
+        <!-- form -->
         <form action="" class="form" id="form" method="POST">
             <div class="mb-2">
                 <label for="username" class="form-label">username :</label>
@@ -51,7 +57,7 @@ if (isset($_POST['register'])) {
             <div class="mb-2">
                 <label for="email" class="form-label">Email :</label>
                 <div class="input-group">
-                    <div class="input-group-text"><i class="fas fa-inbox"></i></div>
+                    <div class="input-group-text"><i>@</i></div>
                     <input type="email" name="email" id="email" autocomplete="off" class="form-control" placeholder="Masukan email">
                 </div>
                 <small id="small">Tidak Boleh Kosong</small>
@@ -64,18 +70,29 @@ if (isset($_POST['register'])) {
                 </div>
                 <small id="small">Tidak Boleh Kosong</small>
             </div>
-            <div class="mb-4">
+            <div class="mb-0">
                 <label for="password2" class="form-label">Konfirmasi Password :</label>
                 <div class="input-group">
-                    <div class="input-group-text"><i class="fas fa-lock-open"></i></div>
+                    <div class="input-group-text"><i class="fas fa-lock"></i></div>
                     <input type="password" name="password2" id="password2" autocomplete="off" class="form-control" placeholder="Masukan password anda kembali">
                 </div>
                 <small id="small">Tidak Boleh Kosong</small>
             </div>
-            <button type="submit" name="register" name="register" class="btn btn-primary float-end">Register</button>
-            <button type="reset" class="btn btn-secondary float-end mx-3">Reset</button>
+
+            <!-- syarat dan ketentuan -->
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" value="syarat" id="syarat">
+                <label class="form-check-label" for="flexCheckChecked">Setuju Dengan Syarat dan Ketentuan</label>
+            </div>
+            <!-- akhir syarat dan ketentuan -->
+
+            <!-- footer -->
+            <button type="submit" name="register" id="register" class="btn btn-primary float-end">Register</button>
+            <button type="reset" id="reset" class="btn btn-secondary float-end mx-3">Reset</button>
             <a href="login.php" class="btn btn-danger float-start">Kembali</a>
+            <!-- akhir footer -->
         </form>
+        <!-- akhir form -->
     </div>
 
     <script src="js/bootstrap.min.js"></script>

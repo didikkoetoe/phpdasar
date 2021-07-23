@@ -42,8 +42,8 @@ if (isset($_POST["cari"])) {
             <span class="navbar-brand h1"><?= $_SESSION["login"]; ?></span> <!-- Brand -->
 
             <form class="d-flex" method="POST">
-                <input class="form-control me-2" type="search" name="keyword" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit" name="cari">cari</button>
+                <input class="form-control me-2" type="search" id="keyword" name="keyword" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" id="cari" type="submit" name="cari">cari</button>
             </form>
             <a href="logout.php" class="btn btn-warning float-end">Log Out</a>
         </div>
@@ -51,7 +51,7 @@ if (isset($_POST["cari"])) {
     <!-- Akhir Navbar -->
 
     <!-- Data -->
-    <div class="container border bg-light mt-4 rounded">
+    <div class="container border bg-light mt-4 rounded" id="data">
         <h2 class="text-center mt-3">Daftar Teman</h2>
         <a href="tambah.php" class="btn btn-success">Tambah Teman</a>
 
@@ -126,6 +126,7 @@ if (isset($_POST["cari"])) {
     <!-- Akhir Data -->
 
     <script src="js/bootstrap.min.js"></script>
+    <script src="ajax.js"></script>
 </body>
 
 </html>

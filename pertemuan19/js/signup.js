@@ -43,4 +43,10 @@ let login = $(document).ready(function () {
       $("small:eq(2)").addClass("pSuccess");
     }
   });
+  $("#reset").click(function (e) {
+    $("#username , #email , #password , #password2").removeClass(
+      "error , success"
+    );
+    $("small").removeClass("pesan , pSuccess");
+  });
 });
